@@ -1,2 +1,3 @@
-# aten-gulp
-The front-end tooling tools used on various project types.
+# Aten Gulp
+
+The tools and automation for task automation used by Aten Design Group.
