@@ -1,5 +1,8 @@
 {
   "name": "aten_gulp",
   "version": "0.0.1",
-  "description": "Collection of build tools for Aten projects."
+  "description": "Collection of build tools for Aten projects.",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
 }
