@@ -1,11 +1,37 @@
 {
   "name": "aten_gulp",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Collection of build tools for Aten projects.",
   "devDependencies": {
-    "eyeglass": "0.6.2",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.2.0",
+    "breakpoint-sass": "~2.6.1",
+    "browser-sync": "^2.11.1",
+    "browserify": "^13.0.0",
+    "browserify-shim": "^3.8.12",
+    "glob": "^6.0.4",
     "gulp": "3.9.0",
     "gulp-autoprefixer": "3.1.0",
-    "gulp-sass": "2.1.0"
+    "gulp-sass": "2.1.0",
+    "require-dir": "^0.3.0",
+    "susy": "~2.2.5",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp": "gulp",
+    "dev": "gulp dev",
+    "css": "gulp css",
+    "js": "gulp js",
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "jquery": "global:jQuery"
   }
 }

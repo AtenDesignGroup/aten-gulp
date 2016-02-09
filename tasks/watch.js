@@ -5,5 +5,9 @@ var config = require('../config/config').watch;
  * Add comments...
  */
 gulp.task('watch', function() {
-  gulp.watch(config.sass, ['sass']);
+  gulp.watch(config.css, ['css']);
+  gulp.watch(config.js, ['js']);
+  // gulp.watch([
+  //   config.paths.themeSourceSVG
+  // ],['svg']);
 });
