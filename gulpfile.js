@@ -1,4 +1,9 @@
-var requireDir = require('require-dir');
+/**
+ * @file
+ * Starting file for FED tools.
+ */
 
-// Require all tasks in gulp, including subfolders
-requireDir('./tasks', { recurse: true });
+ const requireDir = require('require-dir');
+
+ // Require all tasks in gulp, including subfolders
+ requireDir('./gulp/tasks', { recurse: true });
