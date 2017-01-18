@@ -1,19 +1,38 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var config = require('../config/config').css;
-var browserSync = require('../config/config').browserSync.instance;
+/**
+ * @file
+ * Task that compiles site Sass into CSS.
+ */
 
-gulp.task('css', function () {
-  return gulp
-    // Find all `.scss` files from the `stylesheets/` folder
-    .src(config.input)
-    // Run Sass on those files
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const postcss = require('gulp-postcss');
+const cssnext = require('postcss-cssnext');
+const pxrem = require('pixrem');
+const argv = require('yargs').argv;
+
+const config = require('../config').css;
+const paths = require('../config').paths.css;
+const plugins = [
+  cssnext(config.cssnext),
+  pxrem()
+];
+
+const scssTask = function() {
+  return gulp.src(paths.source)
+    // Compile Sass files into CSS.
     .pipe(sass(config.options).on('error', sass.logError))
-    // Add CSS hacks for older browsers
-    .pipe(autoprefixer(config.autoprefixer))
-    // Write the resulting CSS in the output folder
-    .pipe(gulp.dest(config.output))
-    // Update browser-sync
-    .pipe(browserSync.reload({stream:true}));
-});
+    .pipe(postcss(plugins))
+    .pipe(gulp.dest(paths.build));
+}
+
+const scssWatch = function() {
+  scssTask();
+  gulp.watch(paths.source, ['scss'])
+}
+
+gulp.task('scss', scssTask);
+
+/**
+ * CSS task that checks if we're setting up a watcher or a one off compile.
+ */
+gulp.task('css', argv.watch ? scssWatch : scssTask);

@@ -1,45 +1,70 @@
-var gulp = require('gulp');
-var glob = require('glob');
-var path = require('path');
-var source = require('vinyl-source-stream');
-var browserify = require('browserify');
-var shimify = require('browserify-shim');
+/**
+ * @file
+ * Compiling tasks for site Javascript.
+ */
 
-var config = require('../config/config').js;
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const glob = require('glob');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
+const argv = require('yargs').argv;
 
-var defaults = {
-  filesBundles: '/assets/js/*.js',
-  filesSource: '/assets/js/**/*.js',
-  filesBuild: '/public/js',
-  babelPresets: ['es2015', 'react'],
-  babelPlugins: ['transform-object-rest-spread']
-};
-
-var options = Object.assign({}, defaults, config);
+const config = require('../config').js;
+const paths = require('../config').paths.js;
 
 /**
- * Bundle JS
+ * Bundle a browserify object Javascript.
  */
-gulp.task('js', function(cb) {
-  glob(options.filesBundles, function(er, files) {
-    files.forEach(function(file) {
-      var basename = path.basename(file);
-      browserify(file)
-        .exclude('jquery')
-        // .plugin(watchify)
-        // .transform(shimify)
-        .transform('babelify', {
-          presets: options.babelPresets, 
-          plugins: options.babelPlugins
-        })
-        .bundle()
-        // .on('update', bundle)
-        .on('error', function(err){
-          console.log(err.message);
-        })
-        .pipe(source(basename))
-        .pipe(gulp.dest(options.filesBuild));
+function bundle(b) {
+  b.bundle()
+    .pipe(source('main.js'))
+    .pipe(gulp.dest(paths.build));
+}
+
+gulp.task('js', (cb) => {
+  glob(paths.source, (error, files) => {
+    // Add a watcher plugin if a watch flag is set.
+    if (argv.watch) { config.plugins.push('watchify'); }
+
+    // Create a varible with our browserify settings we can utilize later.
+    let b = browserify({
+      entries: files,
+      cache: {},
+      packageCache: {},
+      plugin: config.plugins,
+      paths: config.paths
+    })
+    // Ignore global JS objects.
+    .exclude('jQuery')
+    .exclude('Drupal')
+    // Expose the global JS objects.
+    .transform('exposify', config.expose)
+    // Transform ES6 code.
+    .transform('babelify', config.babelify)
+    // Browserify error handling.
+    .on('error', function(error) {
+      gutil.log(err.message);
+      gutil.beep();
+      this.emit('end');
     });
-    cb(er);
+
+    // Watchify event handlers.
+    if (argv.watch) {
+      // Watchify log handler
+      b.on('log', function(msg) {
+        gutil.log(msg);
+      });
+
+      // Watchify update handler
+      b.on('update', function(id) {
+        gutil.log(id);
+        bundle(b);
+      });
+    }
+
+    // Initial compile.
+    bundle(b);
+    cb(error);
   });
 });
