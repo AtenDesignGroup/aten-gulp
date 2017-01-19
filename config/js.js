@@ -8,7 +8,7 @@ const config = {};
 //
 // Additional paths browserify should check for plugins.
 config.paths = [
-  __dirname + '/../../node_modules'
+  __dirname + '/../node_modules'
 ];
 
 //
