@@ -11,46 +11,31 @@ config.siteRoot = '../public_html';
 
 //
 // Site theme folders.
-config.mainTheme = `${config.siteRoot}/sites/all/themes/stanford_pcs`;
-config.subTheme = `${config.siteRoot}/sites/default/themes/spcs_subtheme`;
+config.theme = `${config.siteRoot}/sites/all/themes/MY_THEME`;
 
 //
 // Site CSS paths.
 config.css = {};
 
 // Paths for the platform's main theme CSS
-config.css.source = [
-  `${config.mainTheme}/src/scss/*.{scss,sass}`,
-  `${config.mainTheme}/src/scss/**/*.{scss,sass}`
-];
-config.css.build = `${config.mainTheme}/build/css`;
-
-// Paths for the site subtheme's CSS.
-config.css.sourceSubtheme = [
-  `${config.subTheme}/src/scss/*.{scss,sass}`,
-  `${config.subTheme}/src/scss/**/*.{scss,sass}`
-];
-config.css.buildSubtheme = `${config.subTheme}/build/css`;
+config.css.source = `${config.theme}/src/scss/*.{scss,sass}`;
+config.css.build = `${config.theme}/build/css`;
 
 //
 // Site JS paths.
 config.js = {};
 
 // Main theme JS
-config.js.source = `${config.mainTheme}/src/js/*.js`;
-config.js.build = `${config.mainTheme}/build/js`;
-
-// Subtheme JS.
-config.js.sourceSubtheme = `${config.subTheme}/src/js/*.js`;
-config.js.buildSubtheme = `${config.subTheme}/build/js`;
+config.js.source = `${config.theme}/src/js/*.js`;
+config.js.build = `${config.theme}/build/js`;
 
 //
 // Paths to site SVG files
 config.svg = {};
 
 // Main theme SVG
-config.svg.source = `${config.mainTheme}/img/svg`;
-config.svg.build = `${config.mainTheme}/build/css/icon`;
+config.svg.source = `${config.theme}/img/svg`;
+config.svg.build = `${config.theme}/build/css/icon`;
 config.svg.optionsFile = `../../${config.svg.source}/grunticonOptions.js`;
 
 module.exports = config;
