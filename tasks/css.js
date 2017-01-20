@@ -7,14 +7,12 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const cssnext = require('postcss-cssnext');
-const pxrem = require('pixrem');
 const argv = require('yargs').argv;
 
 const config = require('../config').css;
 const paths = require('../config').paths.css;
 const plugins = [
-  cssnext(config.cssnext),
-  pxrem()
+  cssnext(config.cssnext)
 ];
 
 const scssTask = function() {
