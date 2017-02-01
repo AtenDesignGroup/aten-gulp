@@ -2,7 +2,7 @@ var browserSync = require('browser-sync');
 var path = require('path');
 
 var siteRoot = './../../web';
-var themeDir = path.join(siteRoot, '/themes/prototype');
+var themeDir = path.join(siteRoot, '/themes/MY_THEME');
 var modulesDir = path.join(siteRoot, '/modules/custom');
 var sourceDir = path.join(themeDir, '/src');
 var buildDir = path.join(themeDir, '/build');
