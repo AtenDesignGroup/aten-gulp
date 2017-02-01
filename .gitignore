@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/windows,osx,node,sublimetext,phpstorm,linux,sass
 
+# Gulp settings
+config/index.js
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
