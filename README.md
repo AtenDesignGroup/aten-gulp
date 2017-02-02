@@ -26,16 +26,25 @@ nvm use
 To compile CSS and JS run the following command.
 
 ```
-npm run dev
+npm run compile
 ```
 
 To automatically watch CSS and JS source files for changes and compile, run:
 
 ```
-npm run dev -- --watch
+npm run compile -- --watch
 ```
 
 To cancel the watch process, type `Ctrl+c`
+
+
+To create a Browsersync proxy server, run:
+
+```
+npm run compile -- --watch --serve
+```
+
+To cancel the browsersync server, type `Ctrl+c`
 
 
 ### CSS
@@ -69,7 +78,7 @@ To cancel the watch process, type `Ctrl+c`
 
 
 ### SVG
-To compile SVG icons run the following command.
+*Not Yet Implemented* To compile SVG icons run the following command.
 
 ```
 npm run svg
