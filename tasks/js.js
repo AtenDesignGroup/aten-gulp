@@ -128,8 +128,7 @@ gulp.task('js', function(cb) {
     b.bundle()
       .pipe(source('common.js'))
       .pipe(gulp.dest(options.commonDir))
-      // Update browser-sync
-      // .pipe(browserSync.stream({once: true}));;
+      .pipe(browserSync.stream({once: true}));
   }
 });
 
