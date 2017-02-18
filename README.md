@@ -10,6 +10,8 @@ Before proceeding with the installation, it is recommended that you use [nvm](ht
 1. `nvm use` This will set the correct version of node.js by checking this project's `.nvmrc` file.
 1. `npm install --global yarn` Yarn is a package manager built on top of npm. It's faster than npm and helps ensure each developer is using the same package versions when developing this project. For [Homebrew](http://brew.sh/) users, `brew install yarn` also is an option.
 1. `yarn` This installs all the correct packages for this project.
+1. `cp config/index.default.js config/index.js` Creates a configuration file
+1. Open up the newly created config/index.js file and replace the siteRoot & themeDir variables are set according to your project and make other adjustments as needed. 
 
 *note: nvm and yarn should be the only global dependencies needed for this project*
 
@@ -26,16 +28,25 @@ nvm use
 To compile CSS and JS run the following command.
 
 ```
-npm run dev
+npm run compile
 ```
 
 To automatically watch CSS and JS source files for changes and compile, run:
 
 ```
-npm run dev -- --watch
+npm run compile -- --watch
 ```
 
 To cancel the watch process, type `Ctrl+c`
+
+
+To create a Browsersync proxy server, run:
+
+```
+npm run compile -- --watch --serve
+```
+
+To cancel the browsersync server, type `Ctrl+c`
 
 
 ### CSS
@@ -69,7 +80,7 @@ To cancel the watch process, type `Ctrl+c`
 
 
 ### SVG
-To compile SVG icons run the following command.
+*Not Yet Implemented* To compile SVG icons run the following command.
 
 ```
 npm run svg

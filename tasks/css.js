@@ -19,12 +19,12 @@ const scssTask = function() {
     // Write the resulting CSS in the output folder
     .pipe(gulp.dest(config.output))
     // Update browser-sync
-    .pipe(browserSync.stream());
+    .pipe(browserSync.stream({once: true}));
 };
 
 const scssWatch = function () {
   scssTask();
-  gulp.watch(config.inputs, ['scss']);
+  return gulp.watch(config.inputs, ['scss']);
 };
 
 gulp.task('scss', scssTask);

@@ -10,6 +10,7 @@ var incPaths = [
   './node_modules/breakpoint-sass/stylesheets',
   themeDir + '/partials'
 ];
+var host = 'localhost:8080';
 
 var grunticonOptions = require(path.join(
   process.cwd(),
@@ -52,13 +53,14 @@ module.exports = {
   },
   browserSync: {
     instance: browserSync.create(),
-    proxy: process.env.BSPROXY || 'c4l.dev:8080',
+    proxy: process.env.BSPROXY || host,
     files: [
-      buildDir + '/**/*.*',
       themeDir + '/**/*.{theme, twig, yml, php}',
       modulesDir + '/**/src/js/*.{js, jsx}'
     ],
-    reloadDebounce: 2000
+    reloadDebounce: 0,
+    reloadDelay: 1500,
+    reloadThrottle: 0
   },
   js: {
     theme: {
@@ -80,7 +82,6 @@ module.exports = {
     filesModuleBundles: modulesDir + '/**/src/js/*.js',
     filesSource: sourceDir + '/js/**/*.js',
     filesBuild: buildDir + '/js',
-    filesCommonDir: modulesDir + '/c4l_global/build/js/',
     babelPresets: [
       './node_modules/babel-preset-es2015',
       './node_modules/babel-preset-react'

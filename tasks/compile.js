@@ -1,13 +1,14 @@
-var gulp = require('gulp');
-var config = require('../config').watch;
+const gulp = require('gulp');
+const argv = require('yargs').argv;
+
+let tasks = [
+  'css',
+  'js'
+]
+
+if (argv.serve) { tasks.push('browser-sync'); }
 
 /**
- * Dev task
+ * Compile task
  */
-gulp.task('compile', [
-  'css',
-  'js',
-  'js-modules',
-  'browser-sync',
-  'watch'
-]);
+gulp.task('compile', tasks);
