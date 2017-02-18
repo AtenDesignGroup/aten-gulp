@@ -19,7 +19,7 @@ const scssTask = function() {
     // Write the resulting CSS in the output folder
     .pipe(gulp.dest(config.output))
     // Update browser-sync
-    .pipe(browserSync.stream({once: true}));
+    .pipe(browserSync.stream());
 };
 
 const scssWatch = function () {
