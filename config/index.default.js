@@ -55,8 +55,11 @@ module.exports = {
     instance: browserSync.create(),
     proxy: process.env.BSPROXY || host,
     files: [
-      themeDir + '/**/*.{theme, twig, yml, php}',
-      modulesDir + '/**/src/js/*.{js, jsx}'
+      themeDir + '/**/*.theme',
+      themeDir + '/**/*.twig',
+      themeDir + '/**/*.php',
+      themeDir + '/**/*.yml',
+      modulesDir + '/**/build/**/*.js'
     ],
     reloadDebounce: 0,
     reloadDelay: 1500,
