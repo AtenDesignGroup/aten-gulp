@@ -3,8 +3,9 @@ const argv = require('yargs').argv;
 
 let tasks = [
   'css',
-  'js'
-]
+  'js',
+  'svg-sprite'
+];
 
 if (argv.serve) { tasks.push('browser-sync'); }
 
