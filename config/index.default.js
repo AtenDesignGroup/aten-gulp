@@ -6,6 +6,9 @@ var themeDir = path.join(siteRoot, '/themes/MY_THEME');
 var modulesDir = path.join(siteRoot, '/modules/custom');
 var sourceDir = path.join(themeDir, '/src');
 var buildDir = path.join(themeDir, '/build');
+var iconsDir = path.join(themeDir, '/images/icons');
+var componentsDir = path.join(themeDir, '/components');
+var templatesDir = path.join(themeDir, '/templates');
 var incPaths = [
   './node_modules/breakpoint-sass/stylesheets',
   themeDir + '/partials'
@@ -95,5 +98,12 @@ module.exports = {
     grunticonOptions: grunticonOptions,
     filesSource: sourceDir + '/img/svg',
     filesBuild: buildDir + '/img/svg'
+  },
+  svgSprite: {
+    inputs: iconsDir + '/*.svg',
+    templateOutputDir: path.join(componentsDir, '/icons'),
+    templateOutputFile: 'sprite.svg.twig',
+    svgOutputDir: path.join(buildDir, '/images'),
+    svgOutputFile: 'sprite.svg'
   }
 };

@@ -11,7 +11,7 @@ Before proceeding with the installation, it is recommended that you use [nvm](ht
 1. `npm install --global yarn` Yarn is a package manager built on top of npm. It's faster than npm and helps ensure each developer is using the same package versions when developing this project. For [Homebrew](http://brew.sh/) users, `brew install yarn` also is an option.
 1. `yarn` This installs all the correct packages for this project.
 1. `cp config/index.default.js config/index.js` Creates a configuration file
-1. Open up the newly created config/index.js file and replace the siteRoot & themeDir variables are set according to your project and make other adjustments as needed. 
+1. Open up the newly created config/index.js file and replace the siteRoot & themeDir variables are set according to your project and make other adjustments as needed.
 
 *note: nvm and yarn should be the only global dependencies needed for this project*
 
@@ -79,7 +79,23 @@ npm run js -- --watch
 To cancel the watch process, type `Ctrl+c`
 
 
-### SVG
+### SVG Sprite
+Compile SVG icons run the following command. The SVG sprite merges a folder full of sprites into a single SVG.
+This task outputs a template to your components directory as well as a standalone svg file in the build directory.
+
+```
+npm run svg-sprite
+```
+
+To automatically compile SVG sprite when files are changed, run:
+
+```
+npm run svg-sprite -- --watch
+```
+
+To cancel the watch process, type `Ctrl+c`
+
+### SVG Grunticon
 *Not Yet Implemented* To compile SVG icons run the following command.
 
 ```

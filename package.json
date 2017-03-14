@@ -16,7 +16,10 @@
     "grunticon-lib": "^1.2.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "3.1.0",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
+    "gulp-svgmin": "^1.2.3",
+    "gulp-svgstore": "^6.1.0",
     "q": "^1.4.1",
     "require-dir": "^0.3.0",
     "sass-loader": "^4.1.1",
@@ -29,7 +32,8 @@
     "gulp": "gulp",
     "compile": "gulp compile",
     "css": "gulp css",
-    "js": "gulp js"
+    "js": "gulp js",
+    "svg-sprite": "gulp svg-sprite"
   },
   "browserify": {
     "transform": [
