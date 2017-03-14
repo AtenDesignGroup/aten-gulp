@@ -42,4 +42,5 @@ const svgWatch = function () {
 };
 
 gulp.task('svg', svgTask);
+// Switch between standard and watch tasks.
 gulp.task('svg-sprite', argv.watch ? svgWatch : svgTask);
