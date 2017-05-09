@@ -38,7 +38,7 @@
     "css:serve": "gulp css --watch --serve",
     "js": "gulp js",
     "js:watch": "gulp js --watch",
-    "js:serve": "gulp js --watch --serve"
+    "js:serve": "gulp js --watch --serve",
     "svg-sprite": "gulp svg-sprite"
   },
   "browserify": {
