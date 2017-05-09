@@ -65,7 +65,7 @@ module.exports = {
       modulesDir + '/**/build/**/*.js'
     ],
     reloadDebounce: 0,
-    reloadDelay: 1500,
+    reloadDelay: 0,
     reloadThrottle: 0
   },
   js: {
