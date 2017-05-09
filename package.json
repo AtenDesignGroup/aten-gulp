@@ -39,7 +39,9 @@
     "js": "gulp js",
     "js:watch": "gulp js --watch",
     "js:serve": "gulp js --watch --serve",
-    "svg-sprite": "gulp svg-sprite"
+    "svg-sprite": "gulp svg-sprite",
+    "svg-sprite:watch": "gulp svg-sprite --watch",
+    "svg-sprite:serve": "gulp svg-sprite --watch --serve"
   },
   "browserify": {
     "transform": [
