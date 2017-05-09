@@ -31,8 +31,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "gulp": "gulp",
     "compile": "gulp compile",
+    "compile:watch": "gulp compile --watch",
+    "compile:serve": "gulp compile --watch --serve",
     "css": "gulp css",
+    "css:watch": "gulp css --watch",
+    "css:serve": "gulp css --watch --serve",
     "js": "gulp js",
+    "js:watch": "gulp js --watch",
+    "js:serve": "gulp js --watch --serve"
     "svg-sprite": "gulp svg-sprite"
   },
   "browserify": {
