@@ -102,7 +102,13 @@ gulp.task('js', function(cb) {
   })
   // Split common code out.
   .plugin(factor, { outputs: files.map(
-    filePath => getJSBuildDir(filePath, options))
+    filePath => {
+      var dir = getBuildDestDir(filePath, options.output, options.base);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+      }
+      return getJSBuildDir(filePath, options);
+    })
   })
   .plugin(errorify)
   // Browserify error handler
