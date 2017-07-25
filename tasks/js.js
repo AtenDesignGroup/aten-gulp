@@ -4,7 +4,6 @@ const glob = require('glob');
 const path = require('path');
 const source = require('vinyl-source-stream');
 const browserify = require('browserify');
-const shimify = require('browserify-shim');
 const fs = require('fs');
 const factor = require('factor-bundle');
 const watchify = require('watchify');
@@ -48,6 +47,23 @@ function getBuildDestDir(file, buildDir, base) {
 }
 
 /**
+ * Resolves a destination folder for module js.
+ * @param  {string} file     The path to the file being processed.
+ */
+function getModuleBuildDestDir(file) {
+  return path.join(path.dirname(file), '../../build');
+}
+
+/**
+ * Returns the path to a file if it were in the given directory.
+ * @param  {string} file     The path to the file being processed.
+ * @param  {string} buildDir The bath to the build directory.
+ */
+function getFilePathInDirectory(file, buildDir) {
+  return path.join(buildDir, path.basename(file));
+}
+
+/**
  * Short form of getBuildDest
  * @param  {string} file              The path to the file being processed.
  * @param  {object} options           Task configuration.
@@ -69,12 +85,16 @@ function globArray(patterns) {
   return [].concat.apply([], filesList);
 }
 
+function isThemeFile(file, themeBase) {
+  return file.indexOf(themeBase) !== -1;
+}
+
 /**
  * Bundle JS
  */
 gulp.task('js', function(cb) {
   // Get a combined list of files.
-  const files = globArray(options.inputs);
+  const files = globArray([].concat(options.inputs, config.filesModuleBundles));
 
   // Set plugins.
   var plugins = [];
@@ -103,11 +123,20 @@ gulp.task('js', function(cb) {
   // Split common code out.
   .plugin(factor, { outputs: files.map(
     filePath => {
-      var dir = getBuildDestDir(filePath, options.output, options.base);
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir);
+      var dir;
+      if (isThemeFile(filePath, options.base)) {
+        dir = getBuildDestDir(filePath, options.output, options.base);
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir);
+        }
+        return getJSBuildDir(filePath, options);
+      } else {
+        dir = getModuleBuildDestDir(filePath, options.output, options.base);
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir);
+        }
+        return getFilePathInDirectory(filePath, dir);
       }
-      return getJSBuildDir(filePath, options);
     })
   })
   .plugin(errorify)
@@ -137,10 +166,10 @@ gulp.task('js', function(cb) {
       .pipe(browserSync.stream({once: true}));
   }
 });
-
-/**
- * Bundle Module JS
- */
+//
+// /**
+//  * Bundle Module JS
+//  */
 // gulp.task('js-modules', function(cb) {
 //   glob(options.filesModuleBundles, function(er, files) {
 //
